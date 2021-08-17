@@ -8,7 +8,7 @@ import java.util.Arrays;
  * Date:2020/4/316:27
  * com.quicksortDesignParttenQAQ
  */
-public class quicksort {
+public class QuickSort {
     public static void quickSort(int[] arr, int begin, int end) {
         //递归退出的条件
         if (begin < end) {
