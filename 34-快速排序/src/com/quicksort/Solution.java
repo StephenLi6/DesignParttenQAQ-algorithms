@@ -3,7 +3,7 @@ package com.quicksort;
 import java.util.ArrayList;
 import java.util.List;
 //复制IP题解
-public class solution {
+public class Solution {
     public static void main(String[] args) {
         String s = "0000";
         System.out.println(solution.restoreIpAddresses(s));
