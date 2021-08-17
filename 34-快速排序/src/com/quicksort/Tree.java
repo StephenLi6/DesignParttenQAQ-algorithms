@@ -38,8 +38,9 @@ class Node {
     }
 };
 */
+package com.quicksort
 
-class tree {
+class Tree {
     public Node connect(Node root) {
         if (root == null) {
             return null;
