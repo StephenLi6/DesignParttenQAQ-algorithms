@@ -76,4 +76,19 @@ public class DepthFirstSearch {
         // 遍历右节点
         recursiveDfs(head.right);
     }
+
+   2 BFS
+//使用Queue实现BFS
+public void BFSWithQueue(TreeNode root) {
+    Queue<TreeNode> queue = new LinkedList<>();
+    if (root != null)
+        queue.add(root);
+    while (!queue.isEmpty()) {
+        TreeNode treeNode = queue.poll();
+        if (treeNode.left != null)
+            queue.add(treeNode.left);
+        if (treeNode.right != null)
+            queue.add(treeNode.right);
+    }
+}
 }
