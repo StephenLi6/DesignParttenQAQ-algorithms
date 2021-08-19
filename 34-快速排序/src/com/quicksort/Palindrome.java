@@ -1,5 +1,9 @@
 package com.quicksort
-
+/*
+输入：s = "babad"
+输出："bab"
+解释："aba" 同样是符合题意的答案。
+*/
 public boolean isPalindromic(String s) {
 		int len = s.length();
 		for (int i = 0; i < len / 2; i++) {
