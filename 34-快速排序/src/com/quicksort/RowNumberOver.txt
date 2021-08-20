@@ -1,0 +1,74 @@
+hive 分组排序函数 row_number() over(partition by " " order by " "desc
+语法：row_number() over (partition by 字段a order by 计算项b desc ) rank 
+
+--这里rank是别名
+
+ 
+
+partition by：类似hive的建表，分区的意思；
+
+order by ：排序，默认是升序，加desc降序；
+
+这里按字段a分区，对计算项b进行降序排序
+
+ 
+
+实例：
+
+要取top10品牌，各品牌的top10渠道，各品牌的top10渠道中各渠道的top10档期 
+
+1、取top10品牌
+
+select 品牌,count/sum/其它() as num  from table_name order by num limit 10;
+
+ 
+
+ 2、 取top10品牌下各品牌的top10渠道        
+
+select 
+
+          a.*
+
+from
+
+          (
+
+                  select 品牌,渠道,count/sum/其它() as num row_number() over (partition by 品牌 order by num desc ) rank  
+
+                   from table_name
+
+                   where 品牌限制条件
+
+                   group by 品牌,渠道
+
+          )a
+
+where 
+
+          a.rank<=10
+
+ 3、 取top10品牌下各品牌的top10渠道中各渠道的top10档期
+
+ 
+
+select 
+
+          a.*
+
+from
+
+          (
+
+                  select 品牌,渠道,档期,count/sum/其它() as num row_number() over (partition by 品牌,渠道 order by num desc ) rank  
+
+                   from table_name
+
+                   where 品牌,渠道 限制条件
+
+                   group by 品牌,渠道,档期
+
+          )a
+
+where 
+
+          a.rank<=10
