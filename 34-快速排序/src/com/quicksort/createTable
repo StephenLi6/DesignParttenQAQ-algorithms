@@ -1,0 +1,22 @@
+spark 建表语句
+drop table if exists  fin_dw.wlhMerchantScoreModel_input;
+create table fin_dw.wlhMerchantScoreModel_input 
+USING orc PARTITIONED BY (pday)
+comment '微零花商户消费子分模型输入项汇总表' as
+
+hive-建表语句
+drop table if exists  fin_dw.wlhMerchantScoreModel_input;
+create table fin_dw.wlhMerchantScoreModel_input 
+comment '微零花商户消费子分模型输入项汇总表'
+PARTITIONED BY (pday) stored as orcfile
+as 
+
+ALTER TABLE table_name PARTITION (dt='2008-08-08') RENAME TO PARTITION (dt='20080808');
+
+ALTER TABLE online_trade_behaviour_features_merge RENAME TO online_trade_behaviour_features_merge_tmp;
+
+ 
+insert overwrite table hdp_credit.hbase_crs_fu_zhou_pboc_feature_calculate_to_model_pbc_feature_smry_entity partition(pday='${yesterday}')
+select rowkey,
+get_json_object(value,'$.pbcFeatureSmryEntity.smryInqyLastType') as smry_inqy_last_type
+from hdp_credit.hbase_crs_fu_zhou_pboc_feature_calculate_to_model_raw_data where partitions ='${yesterday_p}'
